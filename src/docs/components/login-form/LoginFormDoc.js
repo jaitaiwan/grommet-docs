@@ -49,7 +49,7 @@ export default class LoginFormDoc extends Component {
             <dt><code>forgotPassword  {"{element}"}</code></dt>
             <dd>A link that would take the user to a new page.</dd>
             <dt><code>logo            {"{element}"}</code></dt>
-            <dd>A logo component.</dd>
+            <dd>A react node. Best suited to an svg element or font icon.</dd>
             <dt><code>onSubmit        {"{function ({username: ..., " +
               "password: ..., rememberMe: ...})}"}</code></dt>
             <dd>Function that will be called with the username, password and
