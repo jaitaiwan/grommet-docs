@@ -11,8 +11,8 @@ import ActionsIcon from 'grommet/components/icons/base/Actions';
 import NotificationIcon from 'grommet/components/icons/base/Notification';
 import UserSettingsIcon from 'grommet/components/icons/base/UserSettings';
 import ExamplesDoc from '../../../components/ExamplesDoc';
-import Logo from '../../../img/Logo';
 import Example from '../../Example';
+import CloudIcon from 'grommet/components/icons/base/Cloud';
 
 const HeaderExample = (props) => (
   <Example code={props.code} />
@@ -48,7 +48,7 @@ HeaderExamplesDoc.defaultProps = {
     { label: 'Logo, Title and icon Menu', component: HeaderExample,
       props: { code: (
         <Header justify="between">
-          <Title><Logo /> Title</Title>
+          <Title><CloudIcon colorIndex="brand" /> Title</Title>
           <Menu icon={<ActionsIcon />} dropAlign={{right: "right"}}>
             <Anchor href="#" className="active">First</Anchor>
             <Anchor href="#">Second</Anchor>
@@ -60,7 +60,7 @@ HeaderExamplesDoc.defaultProps = {
     { label: 'Logo, Title and labelled Menu', component: HeaderExample,
       props: { code: (
         <Header justify="between">
-          <Title><Logo /> Title</Title>
+          <Title><CloudIcon colorIndex="brand" /> Title</Title>
           <Menu label="Label" dropAlign={{right: "right"}}>
             <Anchor href="#" className="active">First</Anchor>
             <Anchor href="#">Second</Anchor>
@@ -73,7 +73,7 @@ HeaderExamplesDoc.defaultProps = {
       props: { code: (
         <Header size="large" justify="between" colorIndex="neutral-1"
           pad={{horizontal: 'medium'}}>
-          <Title><Logo inverse={true} /> Title</Title>
+          <Title><CloudIcon colorIndex="light-2" /> Title</Title>
           <Menu inline={true} responsive={false} direction="row">
             <Menu icon={<NotificationIcon />}
               dropAlign={{right: "right"}}
