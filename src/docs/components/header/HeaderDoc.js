@@ -2,42 +2,47 @@
 
 import React, { Component } from 'react';
 import Header from 'grommet/components/Header';
+import Button from 'grommet/components/Button';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 import Search from 'grommet/components/Search';
 import Title from 'grommet/components/Title';
+import Box from 'grommet/components/Box';
 import DocsArticle from '../../../components/DocsArticle';
 
-Header.displayName = 'Header';
-
-const USAGE =
-`import Header from 'grommet/components/Header';
-<Header>
-  {contents}
-</Header>`;
+export const DESC = (
+  <span>
+    Combines Title and Menu elements responsively.
+  </span>
+);
 
 export default class HeaderDoc extends Component {
 
   render () {
     return (
-      <DocsArticle title="Header">
+      <DocsArticle title='Header' action={
+        <Button primary={true} path='/docs/header/examples'
+          label='Examples' />
+        }>
 
         <section>
-          <p>Combines Title and Menu elements responsively.</p>
-          <Header justify="between">
-            <Title>Title</Title>
-            <Menu direction="row" align="center" responsive={false}>
-              <Anchor href="#" className="active">First</Anchor>
-              <Anchor href="#">Second</Anchor>
-              <Anchor href="#">Third</Anchor>
-              <Search dropAlign={{right: "right"}} />
-            </Menu>
-          </Header>
-        </section>
+          <p>{DESC}</p>
 
-        <section>
-          <h2>Usage</h2>
-          <pre><code className="html hljs xml">{USAGE}</code></pre>
+          <Box pad='medium' colorIndex='light-2'>
+            <Header pad={{ horizontal: 'medium' }} justify='between'
+              colorIndex='light-1'>
+              <Title>Title</Title>
+              <Box flex={true} justify='end' direction='row' responsive={false}>
+                <Search inline={true} fill={true} placeHolder='Search'
+                  size='medium' dropAlign={{ right: 'right' }}/>
+                <Menu inline={false} dropAlign={{ right: 'right' }}>
+                  <Anchor href='#' className='active'>First</Anchor>
+                  <Anchor href='#'>Second</Anchor>
+                  <Anchor href='#'>Third</Anchor>
+                </Menu>
+              </Box>
+            </Header>
+          </Box>
         </section>
 
         <section>
@@ -54,16 +59,8 @@ export default class HeaderDoc extends Component {
             <dd>Whether to render it in a style suitable for a splash
               screen.</dd>
           </dl>
-          <p>Options for <Anchor path="/docs/box">Box</Anchor> are
+          <p>Options for <Anchor path='/docs/box'>Box</Anchor> are
           also available.</p>
-        </section>
-
-        <section>
-          <h2>Examples</h2>
-
-          <Anchor primary={true} path={`/docs/header/examples`}>
-            Header Examples
-          </Anchor>
         </section>
 
       </DocsArticle>

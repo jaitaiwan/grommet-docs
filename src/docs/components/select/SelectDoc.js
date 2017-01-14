@@ -4,14 +4,10 @@ import React, { Component } from 'react';
 import Select from 'grommet/components/Select';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
-import Anchor from 'grommet/components/Anchor';
+import Button from 'grommet/components/Button';
 import DocsArticle from '../../../components/DocsArticle';
 
 Select.displayName = 'Select';
-
-const USAGE =
-`import Select from 'grommet/components/Select';
-<Select value={} onSearch={} onChange={} options={} />`;
 
 const VALUES = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 
@@ -38,7 +34,10 @@ export default class SelectDoc extends Component {
 
   render () {
     return (
-      <DocsArticle title="Select">
+      <DocsArticle title="Select" action={
+        <Button primary={true} path='/docs/select/examples'
+          label='Examples' />
+        }>
 
         <section>
           <p>An select-like field with optional search capability.</p>
@@ -53,11 +52,6 @@ export default class SelectDoc extends Component {
         </section>
 
         <section>
-          <h2>Usage</h2>
-          <pre><code className="html hljs xml">{USAGE}</code></pre>
-        </section>
-
-        <section>
           <h2>Properties</h2>
           <dl>
             <dt><code>inline        true|false</code></dt>
@@ -66,12 +60,15 @@ export default class SelectDoc extends Component {
             <dt><code>multiple      true|false</code></dt>
             <dd>Whether to allow multiple options to be selected. The
               default is <code>false</code>.</dd>
-            <dt><code>onChange      {"{function ({target: , option: })}"}
+            <dt><code>onChange      {
+                "{function ({target: , option: , value: })}"}
               </code></dt>
-            <dd>Function that will be called when the user selects a option.
-              The target corresponds to the embedded input element, allowing you
-              to distinguish which component triggered the event. The option
-              contains the object chosen from the supplied options.</dd>
+            <dd>Function that will be called when the user selects an option.
+              The <code>target</code> corresponds to the embedded input
+              element, allowing you to distinguish which component triggered
+              the event. The <code>option</code> contains the object chosen
+              from the supplied options. The <code>value</code> contains
+              all selected options when <code>multiple={'{true}'}</code>.</dd>
             <dt><code>onSearch      {"{function (event)}"}</code></dt>
             <dd>Function that will be called when the user types in the
               search input. If this property is not provided, no search
@@ -87,14 +84,6 @@ export default class SelectDoc extends Component {
             <dt><code>value         {"{value: , label: }|{string}"}</code></dt>
             <dd>What text to put in the input.</dd>
           </dl>
-        </section>
-
-        <section>
-          <h2>Examples</h2>
-
-          <Anchor primary={true} path={`/docs/select/examples`}>
-            Select Examples
-          </Anchor>
         </section>
 
       </DocsArticle>

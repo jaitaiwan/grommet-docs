@@ -4,15 +4,17 @@ import React from 'react';
 import { getDocAsJSON } from 'react-desc';
 import DocsArticle from './DocsArticle';
 
-const ComponentDoc = (props) => {
-  const { colorIndex, component, examples, hero, properties } = props;
+export default (props) => {
+  const { component, examples, hero, properties } = props;
+
   const componentDoc = getDocAsJSON(component);
+  
   const propertiesNode = componentDoc.properties.map((property, index) => {
     let defaultVaule = '';
     if (property.defaultValue) {
       defaultVaule = [`The default is `, <b>{property.defaultValue}</b>, '.'];
     }
-    let format = `{${property.format}}`;
+    let format = `{${property.format}}`.replace(/,/g, '|');
     if (property.format === 'boolean') {
       format = '{true|false}';
       if (typeof property.defaultValue === 'undefined') {
@@ -39,44 +41,19 @@ const ComponentDoc = (props) => {
     );
   });
 
-  let usage;
-  if (componentDoc.extras.usage) {
-    usage = (
-      <section>
-        <h2>Usage</h2>
-        <pre><code className="html hljs xml">
-          {componentDoc.extras.usage}
-        </code></pre>
-      </section>
-    );
-  }
-
   return (
-    <DocsArticle title={componentDoc.name} colorIndex={colorIndex}>
+    <DocsArticle title={componentDoc.name}  action={examples}>
 
       <section>
         <p>{componentDoc.description}</p>
         {hero}
       </section>
 
-      {usage}
-
       <section>
         <h2>Properties</h2>
         {propertiesNode}
       </section>
 
-      <section>
-        <h2>Examples</h2>
-        {examples}
-      </section>
-
     </DocsArticle>
   );
 };
-
-ComponentDoc.defaultProps = {
-  colorIndex: 'neutral-3'
-};
-
-export default ComponentDoc;

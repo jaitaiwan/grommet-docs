@@ -22,7 +22,7 @@ export default class HelloWorld extends Component {
             is not meant to be used in production.
           </p>
           <p>
-            To help you get started quickly we provide the
+            To help you get started quickly, we provide the
             following <a
               href="https://codepen.io/pen?template=gaEGPY&editors=0010"
               target="_blank">CodePen</a> template:
@@ -51,7 +51,7 @@ export default class HelloWorld extends Component {
             Now that {"you've"} already played with Grommet, we recommend that
             you check
             out the <Anchor path="/docs/get-started">
-            Get Started</Anchor> page and learn
+            Get Started</Anchor> page. There you will learn
             how to install Grommet in your local environment.
           </p>
         </section>

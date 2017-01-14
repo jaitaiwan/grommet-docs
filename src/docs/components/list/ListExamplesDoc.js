@@ -1,79 +1,94 @@
-// (C) Copyright 2014-2016 Hewlett Packard Enterprise Development LP
+// (C) Copyright 2014-2017 Hewlett Packard Enterprise Development LP
 
 import React, { Component } from 'react';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
-import Anchor from 'grommet/components/Anchor';
-import ExamplesDoc from '../../../components/ExamplesDoc';
-import Example from '../../Example';
+import InteractiveExample from '../../../components/InteractiveExample';
+
+List.displayName = 'List';
+ListItem.displayName = 'ListItem';
+
+const PROPS_SCHEMA = {
+  onMore: { options: ['none', 'func'] },
+  selectable: { options: ['false', 'true', 'multiple'] }
+};
 
 const DATA = [
-  {uid: 1, face: '', name: 'Alan', mood: 'happy'},
-  {uid: 2, face: '', name: 'Chris', mood: 'cool'},
-  {uid: 3, face: '', name: 'Eric', mood: 'odd'}
+  {uid: 1, name: 'Alan', mood: 'happy'},
+  {uid: 2, name: 'Chris', mood: 'cool'},
+  {uid: 3, name: 'Eric', mood: 'odd'}
 ];
 
-class ListExample extends Component {
+export default class ListExamplesDoc extends Component {
 
   constructor () {
     super();
-    this._onSingleSelect = this._onSingleSelect.bind(this);
-    this._onMultipleSelect = this._onMultipleSelect.bind(this);
-
-    this.state = { singleSelected: [0] };
+    this._onChange = this._onChange.bind(this);
+    this._onMore = this._onMore.bind(this);
+    this._onSelect = this._onSelect.bind(this);
+    this.state = { data: DATA, elementProps: {} };
   }
 
-  // single selection is managed by the caller via state.singleSelection
-  _onSingleSelect (selection) {
-    this.setState({singleSelected: selection});
+  _onChange (elementProps) {
+    let data = this.state.data;
+    if ('func' !== elementProps.onMore) {
+      data = DATA.slice(0);
+    }
+    this.setState({ data, elementProps });
   }
 
-  // multiple selection is managed by the Table
-  _onMultipleSelect (selection) {
+  _onMore () {
+    let data = this.state.data.slice(0);
+    data = data.concat(DATA.map((d, i) => ({
+      ...d, uid: (data.length + i + 1) })));
+    this.setState({ data });
+  }
+
+  _onSelect (selection) {
     // no-op
   }
 
   render () {
-    const { ...props } = this.props;
+    const { data, elementProps } = this.state;
+    const props = { ...elementProps };
 
     if ('multiple' === props.selectable) {
-      props.onSelect = this._onMultipleSelect;
-    } else if (props.selectable) {
-      props.selected = this.state.singleSelected;
-      props.onSelect = this._onSingleSelect;
+      props.onSelect = this._onSelect;
+    } else if ('true' === props.selectable) {
+      props.onSelect = this._onSelect;
+      props.selectable = true;
+    } else {
+      delete props.selectable;
     }
 
-    let items = DATA.map((datum) => {
+    if ('func' === props.onMore) {
+      props.onMore = this._onMore;
+    } else {
+      delete props.onMore;
+    }
+
+    let items = data.map((datum, index) => {
+      let itemProps = {};
+      if (0 === index) {
+        itemProps.separator = 'horizontal';
+      }
       return (
-        <ListItem key={datum.uid} justify="between">
+        <ListItem key={datum.uid} justify='between' {...itemProps}>
           <span>{datum.name}</span>
-          <span className="secondary">{datum.mood}</span>
+          <span className='secondary'>{datum.mood}</span>
         </ListItem>
       );
     });
+    const element = <List {...props}>{items}</List>;
 
     return (
-      <Example code={
-        <List {...props}>
-          {items}
-        </List>
-      } />
+      <InteractiveExample contextLabel='List' contextPath='/docs/list'
+        preamble={`import List from 'grommet/components/List';\n` +
+          `import ListItem from 'grommet/components/ListItem';`}
+        propsSchema={PROPS_SCHEMA}
+        align='stretch'
+        element={element}
+        onChange={this._onChange} />
     );
   }
-};
-
-export default class ListExamplesDoc extends ExamplesDoc {};
-
-ListExamplesDoc.defaultProps = {
-  context: <Anchor path="/docs/list">List</Anchor>,
-  examples: [
-    { label: 'Default', component: ListExample },
-    { label: 'Selectable', component: ListExample,
-      props: { selectable: true }
-    },
-    { label: 'Multi-select', component: ListExample,
-      props: { selectable: 'multiple' }
-    }
-  ],
-  title: 'Examples'
 };

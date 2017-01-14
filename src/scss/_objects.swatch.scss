@@ -22,6 +22,8 @@
 }
 
 .logo {
+  max-width: 100%;
+
   &--inverse {
     rect {
       stroke: $colored-icon-color;
@@ -32,4 +34,14 @@
 // for Logo used in Title examples
 .doc-brand {
   stroke: $brand-color;
+}
+
+.code {
+  flex: 1 0 auto;
+  margin: 0;
+  overflow: auto;
+
+  .hljs {
+    // height: 100%;
+  }
 }

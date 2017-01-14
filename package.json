@@ -24,8 +24,9 @@
     "grommet-addons": "https://github.com/grommet/grommet-addons/tarball/stable",
     "highlight.js": "^9.8.0",
     "json-stringify-pretty-compact": "^1.0.1",
-    "jsx-to-string": "^0.2.15",
-    "react-desc": "^0.1.0",
+    "jsx-to-string": "^0.3.0",
+    "node-sass": "^4.1.1",
+    "react-desc": "^1.0.0",
     "react-router": "^3.0.0"
   },
   "devDependencies": {
@@ -45,6 +46,7 @@
   "scripts": {
     "build": "gulp dist",
     "dev": "gulp dev",
+    "dev:alias": "gulp dev --useAlias",
     "alias": "gulp dev --useAlias"
   }
 }

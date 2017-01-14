@@ -8,7 +8,7 @@ import DocsArticle from '../../components/DocsArticle';
 
 const BoxPad = (props) => (
   <Box pad={props.pad} size={{ height: 'small', width: 'small' }}
-    colorIndex="grey-4">
+    colorIndex="grey-5">
     <Box colorIndex="light-2" flex={true} justify="center" align="center">
       <Label><strong>{props.pad}</strong></Label>
     </Box>
@@ -22,7 +22,7 @@ export default class Padding extends Component {
       <DocsArticle title="Padding">
         <section>
           <p>Padding around elements is based off of multiples and fractions of
-            24px. This value is used for line height, sizing, padding and
+            24px. This value is used for line height, sizing, padding,
             margins on objects, etc. Many components expose padding via
             a <code>pad</code> property.</p>
         </section>
@@ -47,12 +47,13 @@ export default class Padding extends Component {
 
         <section>
           <p>
-            The <code>pad</code> attribute can be set to <code>small</code>,
-            <code>medium</code>, <code>large</code>, or an object which
-            just affects the padding of components horizontally or vertically,
-            or in-between multiple components:
-            <code>{"{ horizontal: none|small|medium|large, " +
-              "vertical: none|small|medium|large }"}</code>. Padding
+            The <code>pad</code> attribute can be set to 
+            <code>small</code>, <code>medium</code>, <code>large</code>, 
+            or an object which just affects the padding of components 
+            horizontally or vertically,
+            or in-between multiple 
+            components: <code>{"{ horizontal: none|small|medium|large, " 
+              + "vertical: none|small|medium|large }"}</code>. Padding
             set using <code>between</code> only affects components
             based on the direction set (adds horizontal padding
             between components for <code>row</code>, or vertical
